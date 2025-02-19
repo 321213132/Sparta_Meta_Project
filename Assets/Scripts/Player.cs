@@ -9,13 +9,28 @@ public class Player : MonoBehaviour
 
     private Camera camera;
 
-    Rigidbody2D _rigidbody = null;
+    Vector3 moveVelocity = Vector3.zero;
 
+    Rigidbody2D _rigidbody;
+    Animator _animator;
+    string animState = "AnimState";
+    
     public float speed = 1f;
+
+
+    enum States
+    {
+        up = 1,
+        down = 2,
+        left = 3,
+        right = 4,
+        Idle = 5
+    }
 
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
     private void Start()
     {
@@ -25,25 +40,41 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Movement();
+        MoveAnim();
     }
 
     public void Movement()
     {
-        Vector3 moveVelocity = Vector3.zero;
 
         float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
 
-        moveVelocity = new Vector3(horizontal,vertical,0) * speed * Time.deltaTime;
+        moveVelocity = new Vector3(horizontal,vertical) * speed * Time.deltaTime;
         transform.position += moveVelocity;
+    }
 
-        if(horizontal < 0)
+    public void MoveAnim()
+    {
+        if(moveVelocity.x > 0)//right
         {
-            characterRenderer.flipX = true;
+            _animator.SetInteger(animState, (int)States.right);
         }
-        else if(horizontal > 0)
+        else if(moveVelocity.x < 0)//left
         {
-            characterRenderer.flipX = false;
+            _animator.SetInteger(animState, (int)States.left);
+        }
+        else if (moveVelocity.y > 0)//up
+        {
+            _animator.SetInteger(animState, (int)States.up);
+        }
+        else if (moveVelocity.y < 0)//down
+        {
+            _animator.SetInteger(animState, (int)States.down);
+        }
+        else
+        {
+            _animator.SetInteger(animState, (int)States.Idle);
         }
     }
+
 }

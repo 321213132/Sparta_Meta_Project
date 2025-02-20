@@ -23,11 +23,7 @@ public class NpcData : MonoBehaviour
             case 1:
                 Debug.Log(npcName);
                 break;
-            case 2:
-                Debug.Log(npcName);
-                break;
         }
-
     }
 
     private void OnTriggerStay2D(Collider2D collision)
@@ -41,9 +37,6 @@ public class NpcData : MonoBehaviour
                 case 1:
                     GameManager.instance.player.speed = 10f;
                     SceneManager.LoadScene("AvoidGame");
-                    break;
-                case 2:
-                    Debug.Log("2");
                     break;
             }
         }

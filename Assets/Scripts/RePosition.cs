@@ -12,6 +12,5 @@ public class RePosition : MonoBehaviour
         
         //트리거가 끝날때 옆으로 60칸옮겨 연결해줌
         transform.Translate(Vector2.right * 60);
-        Debug.Log("123");
     }
 }

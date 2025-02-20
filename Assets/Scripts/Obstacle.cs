@@ -15,7 +15,7 @@ public class Obstacle : MonoBehaviour
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        dir = Random.Range(40, 50);
+        dir = Random.Range(40, 55);
         num = Random.Range(0, Monsters.Length+1);
         _spriteRenderer.sprite = Monsters[num];
 
@@ -25,6 +25,7 @@ public class Obstacle : MonoBehaviour
 
         
         transform.Translate(Vector2.right * dir);
-        Debug.Log("chagne");
+        GameManager.instance.AddScore(1);
+        
     }
 }

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    public TextMeshProUGUI scoreText;
+
     public Player player;
     public static GameManager instance;
 
@@ -41,7 +44,9 @@ public class GameManager : MonoBehaviour
 
     public void AddScore(int score)
     {
-        currentScore = score;
-        Debug.Log($"Score : {currentScore}");
+        currentScore += score;
+        //scoreText.text = currentScore.ToString();
     }
+
+    
 }
